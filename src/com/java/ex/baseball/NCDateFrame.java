@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,11 +12,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
+import com.java.ex.db.MemberDao;
+import com.java.ex.db.TeamDao;
 import com.java.ex.main.BaseballMainFrame;
 
 public class NCDateFrame extends JFrame  {
-
+	private Vector v;
+	private Vector cols;
+	DefaultTableModel model;
 	private JLabel kind_base_1tlbl;
 	private JButton savebtn, bckbtn;
 	private JPanel panel,panel1,panel2,panel3;
@@ -33,6 +39,11 @@ public class NCDateFrame extends JFrame  {
 			super("종목 - 야구 - NC");
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
+			TeamDao dao = new TeamDao();
+			v = dao.getTeamNC();
+			cols = getColimn();
+			model = new DefaultTableModel(v, cols);
+			
 			panel = (JPanel)getContentPane();
 			panel1 = (JPanel)getContentPane();
 			panel.setLayout(null);
@@ -47,7 +58,7 @@ public class NCDateFrame extends JFrame  {
 			kind_base_1tlbl = new JLabel("종목 - 야구 - NC");
 			savebtn = new JButton("저장");
 			bckbtn = new JButton("뒤로가기");
-			table = new JTable(contents, header);
+			table = new JTable(model);
 			jscp = new JScrollPane(table);
 			
 			Font f2 = new Font("", Font.BOLD, 20); //("글자체", Font.글자스타일, 글자크기)
@@ -70,6 +81,21 @@ public class NCDateFrame extends JFrame  {
 			bckbtn.addActionListener(new MyActionListener2());
 			
 		}
+		private Vector getColimn() {
+			Vector col = new Vector();
+			col.add("승");
+			col.add("패");
+			col.add("점수");
+
+			return col;
+		}
+		public void jTableRefresh(){
+		       
+			TeamDao dao = new TeamDao();
+	        DefaultTableModel model= new DefaultTableModel(dao.getTeamNC(), getColimn());
+	        table.setModel(model);    
+	       
+	    }
 	
 		class MyActionListener1 implements ActionListener {
 			@Override
@@ -99,47 +125,4 @@ public class NCDateFrame extends JFrame  {
 		}
 
 }
-//
-
-//		Dimension dim = new Dimension(700,500);
-//		dtf.setLocation(0,0);
-//		dtf.setPreferredSize(dim);   
-//		dtf.setLayout(null);
-//		
-//		JLabel kind_base_1tlbl = new JLabel("종목 - 야구 - 1팀");
-//		kind_base_1tlbl.setLocation(10,10);
-//		kind_base_1tlbl.setSize(200,30);
-//		dtf.add(kind_base_1tlbl);
-//		
-//		Font f2 = new Font("", Font.BOLD, 20); //("글자체", Font.글자스타일, 글자크기)
-//		kind_base_1tlbl.setFont(f2);
-//		
-//		JButton savebtn = new JButton("저장");
-//		savebtn.setLocation(400,30);
-//		savebtn.setSize(100,30);
-//		dtf.add(savebtn);
-//		
-//		JButton bckbtn = new JButton("뒤로가기");
-//		bckbtn.setLocation(530,30);
-//		bckbtn.setSize(100,30);
-//		dtf.add(bckbtn);
-//		
-//        String header[]={"기록", "승", "패", "점수"}; //맨위 표가로줄 이름지정 지정
-//        String contents[][]={
-//                {"1경기", "승", "패","7:3"}, //첫째줄 내용입력  null 하면 빈칸으로 출력
-//                {"2경기", "패", "승","2:3"},
-//                {"3경기", "패", "승","4:5"},
-//                {"4경기", "승", "패","5:1"}
-//        };
-//        JTable table = new JTable(contents, header);
-//        JScrollPane jscp1 = new JScrollPane(table);
-//        jscp1.setLocation(40,100);
-//        jscp1.setSize(600,200);		
-//        dtf.add(jscp1);
-//        
-//		
-//		dtf.pack(); //폼크기에 맞게 지정
-//		dtf.setVisible(true);
-//        dtf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //닫기버튼 클릭시 프로그램 종료
-
 
