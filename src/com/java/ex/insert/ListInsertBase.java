@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import com.java.ex.db.InsertDTO;
 import com.java.ex.db.MemberDao;
+import com.java.ex.db.TeamDao;
 import com.java.ex.login.LoginFrame;
 import com.java.ex.main.BaseballMainFrame;
 import com.java.ex.main.MainFrame;
@@ -86,7 +87,7 @@ public class ListInsertBase extends JFrame{
 			dto.setLose(detf.getText());
 			dto.setScore(scoretf.getText());
 			
-			MemberDao dao = MemberDao.getInstance();
+			TeamDao dao = TeamDao.getInstance();
 			int result = dao.insertDate2(dto);
 			
 			if(result == 1) {

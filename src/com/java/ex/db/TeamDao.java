@@ -8,8 +8,8 @@ import java.util.Vector;
 
 public class TeamDao {
 	public TeamDao() {}
-	private static MemberDao instance=new MemberDao();
-	public static MemberDao getInstance() {
+	private static TeamDao instance=new TeamDao();
+	public static TeamDao getInstance() {
 		return instance;
 	}
 	
