@@ -4,6 +4,13 @@ public class InsertDTO {
 	private String Win;
 	private String lose;
 	private String score;
+	private String score2;
+	public String getScore2() {
+		return score2;
+	}
+	public void setScore2(String score2) {
+		this.score2 = score2;
+	}
 	public String getWin() {
 		return Win;
 	}

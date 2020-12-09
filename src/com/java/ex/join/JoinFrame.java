@@ -101,25 +101,36 @@ public class JoinFrame extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			MemberDTO dto = new MemberDTO();
-			dto.setId(idtf.getText());
-			dto.setPw(pwpf.getText());
-			dto.setName(nametf.getText());
-			dto.setEmail(emailtf.getText());
-			
-			MemberDao dao = MemberDao.getInstance();
-			int result = dao.insertDate(dto);
-			
-			if(result == 1) {
-				JOptionPane.showMessageDialog(null, "가입 완료");
-				LoginFrame lf = new LoginFrame();
-				lf.setSize(new Dimension(500,500));
-				lf.setVisible(true);
-				dispose();
-				dispose();
+			if (idtf.getText().trim().equals("")) {
+				JOptionPane.showMessageDialog(null, "아이디를 입력하세요.");
+			} else if (pwpf.getText().trim().equals("")) {
+				JOptionPane.showMessageDialog(null, "비밀번호를 입력하세요.");
+			} else if (nametf.getText().trim().equals("")) {
+				JOptionPane.showMessageDialog(null, "이름을 입력하세요.");
+			} else if (emailtf.getText().trim().equals("")) {
+				JOptionPane.showMessageDialog(null, "이메일을 입력하세요.");
+			} else {
+				dto.setId(idtf.getText());
+				dto.setPw(pwpf.getText());
+				dto.setName(nametf.getText());
+				dto.setEmail(emailtf.getText());
+				
+				MemberDao dao = MemberDao.getInstance();
+				int result = dao.insertDate(dto);
+				
+				if(result == 1) {
+					JOptionPane.showMessageDialog(null, "가입 완료");
+					LoginFrame lf = new LoginFrame();
+					lf.setSize(new Dimension(500,500));
+					lf.setVisible(true);
+					dispose();
+					dispose();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "가입 실패");
+				}
 			}
-			else {
-				JOptionPane.showMessageDialog(null, "가입 실패");
-			}
+			
 		}
 	}
 	

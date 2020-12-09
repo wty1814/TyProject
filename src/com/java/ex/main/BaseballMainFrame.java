@@ -16,16 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import com.java.ex.baseball.DoosanDateFrame;
-import com.java.ex.baseball.HanwhaDateFrame;
-import com.java.ex.baseball.KIADateFrame;
-import com.java.ex.baseball.KTDateFrame;
-import com.java.ex.baseball.KiwoomDateFrame;
-import com.java.ex.baseball.LGDateFrame;
-import com.java.ex.baseball.LotteDateFrame;
-import com.java.ex.baseball.NCDateFrame;
-import com.java.ex.baseball.SKDateFrame;
-import com.java.ex.baseball.SamsungDateFrame;
+import com.java.ex.baseball.TeamDate;
 import com.java.ex.db.MemberDao;
 import com.java.ex.db.TeamDao;
 import com.java.ex.insert.ListInsertBase;
@@ -43,7 +34,7 @@ public class BaseballMainFrame extends JFrame {
 	private JTable table, jtable;
 	private JScrollPane jscp1;
 	private JButton detailbtn, joinbtn, mainbtn;
-	private JComboBox<String> timelist;
+	private JComboBox<String> teamlist;
 	String items[] = { "LG", "두산", "삼성", "SK", "키움", "한화", "롯데", "NC", "KIA", "KT" };
 
 //	DefaultTableModel dt = new DefaultTableModel(header, 0);
@@ -77,7 +68,7 @@ public class BaseballMainFrame extends JFrame {
 		kind_belbl = new JLabel("종목 - 야구");
 		jtable = new JTable(model);
 		jscp1 = new JScrollPane(jtable);
-		timelist = new JComboBox<String>(items);
+		teamlist = new JComboBox<String>(items);
 		detailbtn = new JButton("상세보기");
 		joinbtn = new JButton("결과추가");
 		mainbtn = new JButton("메인화면");
@@ -89,7 +80,7 @@ public class BaseballMainFrame extends JFrame {
 		kind_belbl.setFont(f2);
 
 		panel.add(kind_belbl);
-		panel1.add(timelist);
+		panel1.add(teamlist);
 		panel2.add(detailbtn);
 		panel2.add(joinbtn);
 		add(jscp1);
@@ -116,6 +107,7 @@ public class BaseballMainFrame extends JFrame {
 		col.add("팀");
 		col.add("승");
 		col.add("패");
+		col.add("경기수");
 		col.add("승률");
 
 		return col;
@@ -155,58 +147,11 @@ public class BaseballMainFrame extends JFrame {
 		@Override
 
 		public void actionPerformed(ActionEvent e) {
-			// timelist.getSelectedItem().toString();
-			if (timelist.getSelectedItem().toString() == "LG") {
-				LGDateFrame LG = new LGDateFrame();
-				LG.setSize(new Dimension(700, 500));
-				LG.setVisible(true);
-				dispose();
-			} else if (timelist.getSelectedItem().toString() == "KT") {
-				KTDateFrame kt = new KTDateFrame();
-				kt.setSize(new Dimension(700, 500));
-				kt.setVisible(true);
-				dispose();
-			} else if (timelist.getSelectedItem().toString() == "KIA") {
-				KIADateFrame kia = new KIADateFrame();
-				kia.setSize(new Dimension(700, 500));
-				kia.setVisible(true);
-				dispose();
-			} else if (timelist.getSelectedItem().toString() == "두산") {
-				DoosanDateFrame doosan = new DoosanDateFrame();
-				doosan.setSize(new Dimension(700, 500));
-				doosan.setVisible(true);
-				dispose();
-			} else if (timelist.getSelectedItem().toString() == "삼성") {
-				SamsungDateFrame samsung = new SamsungDateFrame();
-				samsung.setSize(new Dimension(700, 500));
-				samsung.setVisible(true);
-				dispose();
-			} else if (timelist.getSelectedItem().toString() == "SK") {
-				SKDateFrame sk = new SKDateFrame();
-				sk.setSize(new Dimension(700, 500));
-				sk.setVisible(true);
-				dispose();
-			} else if (timelist.getSelectedItem().toString() == "NC") {
-				NCDateFrame nc = new NCDateFrame();
-				nc.setSize(new Dimension(700, 500));
-				nc.setVisible(true);
-				dispose();
-			} else if (timelist.getSelectedItem().toString() == "롯데") {
-				LotteDateFrame lotte = new LotteDateFrame();
-				lotte.setSize(new Dimension(700, 500));
-				lotte.setVisible(true);
-				dispose();
-			} else if (timelist.getSelectedItem().toString() == "한화") {
-				HanwhaDateFrame hanwha = new HanwhaDateFrame();
-				hanwha.setSize(new Dimension(700, 500));
-				hanwha.setVisible(true);
-				dispose();
-			} else if (timelist.getSelectedItem().toString() == "키움") {
-				KiwoomDateFrame kiwoom = new KiwoomDateFrame();
-				kiwoom.setSize(new Dimension(700, 500));
-				kiwoom.setVisible(true);
-				dispose();
-			}
+			
+			TeamDate td = new TeamDate(teamlist.getSelectedItem().toString());
+			td.setSize(new Dimension(700, 500));
+			td.setVisible(true);
+			dispose();
 		}
 
 	}

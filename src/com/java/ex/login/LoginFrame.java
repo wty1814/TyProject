@@ -86,21 +86,27 @@ public class LoginFrame extends JFrame {
 	class MyActionListener1 implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String id = idTf.getText();
-			String pw = pwpf.getText();
-			MemberDao dao = MemberDao.getInstance();
-			int result = dao.findByUsernameAndPassword(id, pw);
-			if(result == 1) {
-				JOptionPane.showMessageDialog(null, "로그인성공");
-				MainFrame jf = new MainFrame(idTf.getText());
-				jf.setVisible(true);
-				jf.setSize(new Dimension(500,500));
-				dispose();
+			if (idTf.getText().trim().equals("")) {
+				JOptionPane.showMessageDialog(null, "아이디를 입력하세요.");
+			} else if (pwpf.getText().trim().equals("")) {
+				JOptionPane.showMessageDialog(null, "비밀번호를 입력하세요.");
 			}
 			else {
-				JOptionPane.showMessageDialog(null, "로그인실패");
+				String id = idTf.getText();
+				String pw = pwpf.getText();
+				MemberDao dao = MemberDao.getInstance();
+				int result = dao.findByUsernameAndPassword(id, pw);
+				if(result == 1) {
+					JOptionPane.showMessageDialog(null, "로그인성공");
+					MainFrame jf = new MainFrame(idTf.getText());
+					jf.setVisible(true);
+					jf.setSize(new Dimension(500,500));
+					dispose();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "로그인실패");
+				}	
 			}
-			
 
 		}
 	}

@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 
 public class DBConnection {
 	static String driver = "org.mariadb.jdbc.Driver";
-	static String url = "jdbc:mariadb://localhost:3307/test2";
+	static String url = "jdbc:mariadb://localhost:3307/test";
 	static String uid = "root";
 	static String pwd = "1111";
 	public static Connection getConnection() {
